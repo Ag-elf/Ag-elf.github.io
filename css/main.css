@@ -10,7 +10,7 @@
   --table-row-odd-bg-color: #f9f9f9;
   --table-row-hover-bg-color: #f5f5f5;
   --menu-item-bg-color: #f5f5f5;
-  --btn-default-bg: #fff;
+  --btn-default-bg: #3f5973;
   --btn-default-color: #555;
   --btn-default-border-color: #555;
   --btn-default-hover-bg: #222;
@@ -265,7 +265,7 @@ dd {
   padding: 0;
 }
 kbd {
-  background-color: #f5f5f5;
+  background-color: #eee;
   background-image: linear-gradient(#eee, #fff, #eee);
   border: 1px solid #ccc;
   border-radius: 0.2em;
@@ -1108,6 +1108,30 @@ pre .javascript .function {
 .use-motion .menu-item {
   opacity: 0;
 }
+.book-mark-link {
+  border-bottom: none;
+  display: inline-block;
+  position: fixed;
+  right: 30px;
+  top: -10px;
+  transition: 0.3s;
+}
+@media (max-width: 991px) {
+  .book-mark-link {
+    display: none;
+  }
+}
+.book-mark-link::before {
+  color: #222;
+  content: '\f02e';
+  font-family: 'FontAwesome';
+  font-size: 32px;
+  line-height: 1;
+}
+.book-mark-link:hover,
+.book-mark-link-fixed {
+  top: -2px;
+}
 .github-corner :hover .octo-arm {
   animation: octocat-wave 560ms ease-in-out;
 }
@@ -1246,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #38f0a2;
+  background: #ff67ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1390,7 +1414,7 @@ pre .javascript .function {
   white-space: nowrap;
 }
 .post-toc .nav .nav-child {
-  display: none;
+  display: block;
 }
 .post-toc .nav .active > .nav-child {
   display: block;
@@ -1483,9 +1507,10 @@ pre .javascript .function {
   width: 100%;
 }
 .with-love {
-  color: #808080;
+  color: #DDA0A0;
   display: inline-block;
   margin: 0 5px;
+  animation: iconAnimate 1.33s ease-in-out infinite;
 }
 .powered-by,
 .theme-info {
@@ -1720,7 +1745,7 @@ pre .javascript .function {
   color: var(--link-color);
 }
 .posts-collapse::before {
-  background: #f5f5f5;
+  background: #eee;
   content: ' ';
   height: 100%;
   left: 0;
@@ -2128,7 +2153,7 @@ pre .javascript .function {
   content: '\f017';
 }
 .event-list .event-past {
-  background: #f5f5f5;
+  background: #eee;
 }
 .event-list .event-past .event-summary,
 .event-list .event-past .event-details {
@@ -2748,6 +2773,15 @@ ul.breadcrumb li + li:last-child {
     margin-top: 0;
   }
 }
+.header-inner {
+  background: rgba(255,255,255,0.8);
+}
+.sidebar {
+  background: rgba(255,255,255,0);
+}
+.sidebar-inner {
+  background: rgba(255,255,255,0.8);
+}
 /* 圆角 */
 .header-inner,
 .sidebar,
@@ -2768,11 +2802,57 @@ ul.breadcrumb li + li:last-child {
 }
 .post-block,
 .post-block+.post-block {
+  background: rgba(255,255,255,0.8);
   border-radius: 7px !important;
 }
 .back-to-top {
   border-radius: 7px;
   font-weight: bold;
+}
+/* post-标签选择卡片加粗 */
+.post-body .tabs ul.nav-tabs li.tab a {
+  font-weight: bold;
+}
+/* categories */
+@media (max-width: 767px) {
+  .category-all-page .category-list-item {
+    margin: 10px 40px;
+  }
+  .category-all-page .category-all ul {
+    list-style-type: disc;
+  }
+}
+tablet-desktop()
+/* tags */
+.tag-cloud a,
+.posts-expand .post-tags a {
+  padding: 2px 10px;
+  margin: 8px;
+  background: #eee;
+  opacity: 0.8;
+  border-bottom: none;
+  border-radius: 15px;
+}
+.tag-cloud a:hover,
+.posts-expand .post-tags a:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+  .tag-cloud a,
+  .posts-expand .post-tags a {
+    color: var(--text-color) !important;
+    background: #3f5973;
+  }
+}
+.site-brand-container {
+  background: url("/theme_images/site-bg.jpg");
+  opacity: 0.8;
+  background-position: 70% 20%;
+  background-size: cover;
+}
+.footer {
+  color: #fff;
 }
 body {
   background-image: url("/theme_images/body-bg.png");
@@ -2783,4 +2863,20 @@ body {
   body {
     background-image: none;
   }
+}
+hr {
+  background-image: repeating-linear-gradient(-45deg, #bbb, #bbb 4px, transparent 4px, transparent 8px);
+}
+.post-body h1,
+.post-body h2 {
+  border-bottom: 1px solid #bbb;
+}
+.post-body h3 {
+  border-bottom: 1px dotted #bbb;
+}
+.quote_div {
+  font-weight: bold;
+  font-family: '方正姚体';
+  font-size: 25px;
+  text-align: center;
 }
