@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff67ff;
+  background: #790bff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2846,7 +2846,7 @@ tablet-desktop()
   }
 }
 .site-brand-container {
-  background: url("/theme_images/site-bg.jpg");
+  background: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/site-bg.jpg");
   opacity: 0.8;
   background-position: 70% 20%;
   background-size: cover;
@@ -2855,7 +2855,7 @@ tablet-desktop()
   color: #fff;
 }
 body {
-  background-image: url("/theme_images/body-bg.png");
+  background-image: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/body-bg.png");
   background-repeat: repeat;
   background-attachment: fixed;
 }
