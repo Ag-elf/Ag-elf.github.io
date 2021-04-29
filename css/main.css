@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #209fff;
+  background: #fb7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2776,6 +2776,7 @@ ul.breadcrumb li + li:last-child {
 .header-inner {
   background: rgba(255,255,255,0.8);
 }
+/************************* Sidebar *************************/
 .sidebar {
   background: rgba(255,255,255,0);
 }
@@ -2855,6 +2856,7 @@ tablet-desktop()
   color: #fff;
 }
 body {
+  font-size: 13px;
   background-image: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/body-bg.png");
   background-repeat: repeat;
   background-attachment: fixed;
@@ -2877,6 +2879,20 @@ hr {
 .quote_div {
   font-weight: bold;
   font-family: '方正姚体';
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
+}
+code {
+  font-size: 13px;
+  border-radius: 5px;
+  margin: auto 2px;
+  border: 1px solid #aaa;
+  background: rgba(255,255,255,0.4);
+}
+code:hover {
+  color: #e65c00;
+  border: 1px solid #ffb380;
+}
+.highlight *::selection {
+  background: #a0a0a0;
 }
