@@ -41,14 +41,171 @@
       </categories>
   </entry>
   <entry>
-    <title>0x02 - 我眼中的职业病</title>
-    <url>/2021/04/29/0x02-FFXIV-little-story/</url>
-    <content><![CDATA[]]></content>
+    <title>0x04 - 学习地图</title>
+    <url>/2021/04/30/0x04-Study-Map/</url>
+    <content><![CDATA[<h2 id="物件识别"><a href="#物件识别" class="headerlink" title="物件识别"></a>物件识别</h2><p>搭建在 PaddlePaddle 上的物件识别模块，Github: <a href="https://github.com/PaddlePaddle/PaddleDetection">PaddleDetection</a>。</p>
+<p>下面是概述图。</p>
+<table>
+  <tbody class='my_table'>
+    <thead>
+        <tr align="center" valign="bottom">
+        <td>
+            <b>Architectures</b>
+        </td>
+        <td>
+            <b>Backbones</b>
+        </td>
+        <td>
+            <b>Components</b>
+        </td>
+        <td>
+            <b>Data Augmentation</b>
+        </td>
+        </tr>
+    </thead>
+    <tr valign="top">
+      <td>
+        <ul><li><b>Two-Stage Detection</b></li>
+          <ul>
+            <li>Faster RCNN</li>
+            <li>FPN</li>
+            <li>Cascade-RCNN</li>
+            <li>Libra RCNN</li>
+            <li>Hybrid Task RCNN</li>
+            <li>PSS-Det</li>
+          </ul>
+        </ul>
+        <ul><li><b>One-Stage Detection</b></li>
+          <ul>
+            <li>RetinaNet</li>
+            <li>YOLOv3</li>
+            <li>YOLOv4</li>  
+            <li>PP-YOLO</li>
+            <li>SSD</li>
+          </ul>
+        </ul>
+        <ul><li><b>Anchor Free</b></li>
+          <ul>
+            <li>CornerNet-Squeeze</li>
+            <li>FCOS</li>  
+            <li>TTFNet</li>
+          </ul>
+        </ul>
+        <ul>
+          <li><b>Instance Segmentation</b></li>
+            <ul>
+             <li>Mask RCNN</li>
+             <li>SOLOv2</li>
+            </ul>
+        </ul>
+        <ul>
+          <li><b>Face-Detction</b></li>
+            <ul>
+             <li>FaceBoxes</li>
+             <li>BlazeFace</li>
+             <li>BlazeFace-NAS</li>
+            </ul>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>ResNet(&vd)</li>
+          <li>ResNeXt(&vd)</li>
+          <li>SENet</li>
+          <li>Res2Net</li>
+          <li>HRNet</li>
+          <li>Hourglass</li>
+          <li>CBNet</li>
+          <li>GCNet</li>
+          <li>DarkNet</li>
+          <li>CSPDarkNet</li>
+          <li>VGG</li>
+          <li>MobileNetv1/v3</li>  
+          <li>GhostNet</li>
+          <li>Efficientnet</li>  
+        </ul>
+      </td>
+      <td>
+        <ul><li><b>Common</b></li>
+          <ul>
+            <li>Sync-BN</li>
+            <li>Group Norm</li>
+            <li>DCNv2</li>
+            <li>Non-local</li>
+          </ul>  
+        </ul>
+        <ul><li><b>FPN</b></li>
+          <ul>
+            <li>BiFPN</li>
+            <li>BFP</li>  
+            <li>HRFPN</li>
+            <li>ACFPN</li>
+          </ul>  
+        </ul>  
+        <ul><li><b>Loss</b></li>
+          <ul>
+            <li>Smooth-L1</li>
+            <li>GIoU/DIoU/CIoU</li>  
+            <li>IoUAware</li>
+          </ul>  
+        </ul>  
+        <ul><li><b>Post-processing</b></li>
+          <ul>
+            <li>SoftNMS</li>
+            <li>MatrixNMS</li>  
+          </ul>  
+        </ul>
+        <ul><li><b>Speed</b></li>
+          <ul>
+            <li>FP16 training</li>
+            <li>Multi-machine training </li>  
+          </ul>  
+        </ul>  
+      </td>
+      <td>
+        <ul>
+          <li>Resize</li>  
+          <li>Flipping</li>  
+          <li>Expand</li>
+          <li>Crop</li>
+          <li>Color Distort</li>  
+          <li>Random Erasing</li>  
+          <li>Mixup </li>
+          <li>Cutmix </li>
+          <li>Grid Mask</li>
+          <li>Auto Augment</li>  
+        </ul>  
+      </td>  
+    </tr>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+]]></content>
       <categories>
-        <category>FF14</category>
+        <category>技术</category>
       </categories>
       <tags>
-        <tag>FFXIV的故事</tag>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x02 - 杂碎</title>
+    <url>/2021/04/29/0x02-FFXIV-little-story/</url>
+    <content><![CDATA[<h2 id="0x00-星辰大海"><a href="#0x00-星辰大海" class="headerlink" title="0x00 星辰大海"></a>0x00 星辰大海</h2><p>人说星辰大海可以是浪漫，</p>
+<p>无垠，无限，渺无边际。</p>
+<blockquote>
+<p>Johnny Boy, Johnny Boy, We are born for storm whether</p>
+<p>From <em>“Johnny Boy”</em> By <strong>Santiano</strong></p>
+</blockquote>
+<p>说不定去当海盗是个不错的归处。</p>
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2>]]></content>
+      <categories>
+        <category>碎碎念</category>
+      </categories>
+      <tags>
+        <tag>杂七杂八</tag>
       </tags>
   </entry>
   <entry>
