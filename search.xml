@@ -1,48 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>你好世界，Hello World，ハローワルド</title>
-    <url>/2021/04/27/hello-world/</url>
-    <content><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>欢迎来到这里，你找到了一个不起眼的攻城师。</p>
-<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>网易云音乐后期患者，时不时会犯病，多多包容呐~</p>
-<p>正经工作是一名算法工程师，也许将来的某一天会有自己开源的社区吧hhhh</p>
-<p>梦想是有有一个厉害又别致的个人助力AI</p>
-<p>工作之余是艾欧泽亚合法光呆，FFXIV洗澡水玩家，可以在下面找到我。</p>
-<p>想要做的事有一大箩筐，但是时间又这么少。</p>
-<div class='quote_div'><p align='left'><i class="fa fa-quote-left"></i></p>
-「假如不会正则搜索的话，不如就遍历吧~」
-<p align='right'><i class="fa fa-quote-right"></i><p></div>
-
-<h3 id="关于程序员"><a href="#关于程序员" class="headerlink" title="关于程序员"></a>关于程序员</h3><p>主攻机器学习的研究生</p>
-<div class='quote_div'><p align='left'><i class="fa fa-quote-left"></i></p>
-「笑死，根本不是机器学习，是人类学习 」
-<p align='right'><i class="fa fa-quote-right"></i><p></div>
-
-
-<h3 id="关于FFXIV"><a href="#关于FFXIV" class="headerlink" title="关于FFXIV"></a>关于FFXIV</h3><p>Since 2018。下图为曾经的猫。</p>
-<p><img src="/images/shigure_hotaru.jpg" alt="shigure_hotaru" title="傻猫"></p>
-<hr>
-<p>如今的拉拉肥。</p>
-<p><img src="/images/lalafell.png" alt="shigure_hotaru" title="拉拉肥"></p>
-<hr>
-<p>不如在这里贴一贴曾经的经历吧，来自曾经月雫话剧团的各位们。<br>详情可以去看 <a href="https://space.bilibili.com/4064009">月雫剧团录像机EijNim号</a></p>
-<p><img src="/images/hello_world_2.jpg" alt="shigure_hotaru" title="亲友们"></p>
-<hr>
-<p>也曾经攻略过绝本。感谢过去的队友们~<br>右三绿脖子的猫就是我啦~</p>
-<p><img src="/images/after.jpg" alt="alexander"></p>
-<p>详情可以去看 <a href="https://www.bilibili.com/video/BV14E411M7eS">这个</a></p>
-<h2 id="如今"><a href="#如今" class="headerlink" title="如今"></a>如今</h2><p>目前是一名只要日子过得去就不准备随便改变的程序员</p>
-<p>该如何面对未来呢~</p>
-<h2 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h2><p>理想型是喜欢自己的人。</p>
-<p>不过未来谁又能明白呢，或许想要成为一名努力而又有所成就的人吧</p>
-]]></content>
-      <categories>
-        <category>碎碎念</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>0x04 - 学习地图</title>
-    <url>/2021/04/30/0x04-Study-Map/</url>
+    <title>0x03 - 学习地图</title>
+    <url>/2021/04/30/0x03-Study-Map/</url>
     <content><![CDATA[<h2 id="物件识别"><a href="#物件识别" class="headerlink" title="物件识别"></a>物件识别</h2><p>搭建在 PaddlePaddle 上的物件识别模块，Github: <a href="https://github.com/PaddlePaddle/PaddleDetection">PaddleDetection</a>。</p>
 <p>下面是概述图。</p>
 <table>
@@ -182,6 +142,8 @@
   </tbody>
 </table>
 
+<p>希望学起来不会太累、</p>
+<hr>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -192,15 +154,42 @@
   </entry>
   <entry>
     <title>0x02 - 杂碎</title>
-    <url>/2021/04/29/0x02-FFXIV-little-story/</url>
-    <content><![CDATA[<h2 id="0x00-星辰大海"><a href="#0x00-星辰大海" class="headerlink" title="0x00 星辰大海"></a>0x00 星辰大海</h2><p>人说星辰大海可以是浪漫，</p>
+    <url>/2021/04/29/0x02-Other-things/</url>
+    <content><![CDATA[<h2 id="0x00-大海"><a href="#0x00-大海" class="headerlink" title="0x00 大海"></a>0x00 大海</h2><p>大海可以是浪漫，</p>
 <p>无垠，无限，渺无边际。</p>
-<blockquote>
-<p>Johnny Boy, Johnny Boy, We are born for storm whether</p>
-<p>From <em>“Johnny Boy”</em> By <strong>Santiano</strong></p>
-</blockquote>
+<div class='quote_div_en'><p align='left'><i class="fa fa-quote-left"></i></p>
+<dd>Johnny Boy, Johnny Boy, we are born for stormy weather.</dd>
+<dd>Johnny Boy, Johnny Boy, I wish you last farewell.</dd>
+<dd>Somewhere out far away, we are sailing on together.</dd>
+<dd>Oh Johnny, my, we are leaving tonight.</dd>
+<dd>Johnny say Good Bye.</dd>
+<dt align='right'> ------ From <i>"Johnny Boy"</i> By Santiano</dt>
+<p align='right'><i class="fa fa-quote-right"></i><p></div>
+
 <p>说不定去当海盗是个不错的归处。</p>
-<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2>]]></content>
+<h2 id="0x01-朗姆酒"><a href="#0x01-朗姆酒" class="headerlink" title="0x01 朗姆酒"></a>0x01 朗姆酒</h2><p>如果海盗不打杀，只是在船上，</p>
+<p>早期的水手们，因为清水容易变质会致病，</p>
+<p>为了保存珍贵的水资源，都喜欢喝朗姆酒。</p>
+<p>说不定一船人，天天都醉醺醺的，</p>
+<p>横摆着，摇晃着，朗姆酒与啤酒，</p>
+<p>这样自由的日子比起打工和上班族，好像更不错。</p>
+<p>杨帆，起航——</p>
+<p>需要救命的朗姆，朗姆，朗姆，否则我们将干渴而死！</p>
+<div class='quote_div_en'><p align='left'><i class="fa fa-quote-left"></i></p>
+<dd>Wir brauchen Rum, Rum, Rum, Sonst verdursten wir.</dd>
+<dt align='right'> ------ From <i>"Es gibt nur Wasser"</i> By Santiano</dt>
+<p align='right'><i class="fa fa-quote-right"></i><p></div>
+
+
+<h2 id="0x02-海里有什么"><a href="#0x02-海里有什么" class="headerlink" title="0x02 海里有什么"></a>0x02 海里有什么</h2><p>有宝藏、有梦想、还有阴魂不散的莫莫拉·莫拉。</p>
+<p>真正的文兰或许不会存在，死后也不会回归瓦尔哈拉，</p>
+<p>但对于海盗来说，梦想与彼方对于自己来说又有什么关系呢？</p>
+<p>《冰海战记》中对于维京海盗的描写出乎我的意料。</p>
+<p>也许烧杀抢掠才该是海盗生活的主旋律，<br>但是阿谢拉特有自己的梦想，远方的文兰，自己的抱负。<br>出身卑贱，背负着罗马人的血脉，</p>
+<p>不管是大帝还是托尔芬，<br>大概都会铭记一生吧。</p>
+<p>海水是咸，裹挟着苦辣，把所有的一切都蚀刻殆尽。</p>
+<h2 id="0x03-彼岸"><a href="#0x03-彼岸" class="headerlink" title="0x03 彼岸"></a>0x03 彼岸</h2><hr>
+]]></content>
       <categories>
         <category>碎碎念</category>
       </categories>
@@ -287,6 +276,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo new post new_post        <span class="comment"># 新建名字叫 new_post 的 post</span></span></span><br></pre></td></tr></table></figure>
 
 <p>执行完成后你就可以在 <code>source/_posts</code> 里找到新建的文档了。</p>
+<hr>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -296,10 +286,52 @@
       </tags>
   </entry>
   <entry>
+    <title>你好世界，Hello World，ハローワルド</title>
+    <url>/2021/04/27/hello-world/</url>
+    <content><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>欢迎来到这里，你找到了一个不起眼的攻城师。</p>
+<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>网易云音乐后期患者，时不时会犯病，多多包容呐~</p>
+<p>正经工作是一名算法工程师，也许将来的某一天会有自己开源的社区吧hhhh</p>
+<p>梦想是有有一个厉害又别致的个人助力AI</p>
+<p>工作之余是艾欧泽亚合法光呆，FFXIV洗澡水玩家，可以在下面找到我。</p>
+<p>想要做的事有一大箩筐，但是时间又这么少。</p>
+<div class='quote_div'><p align='left'><i class="fa fa-quote-left"></i></p>
+「假如不会正则搜索的话，不如就遍历吧~」
+<p align='right'><i class="fa fa-quote-right"></i><p></div>
+
+<h3 id="关于程序员"><a href="#关于程序员" class="headerlink" title="关于程序员"></a>关于程序员</h3><p>主攻机器学习的研究生</p>
+<div class='quote_div'><p align='left'><i class="fa fa-quote-left"></i></p>
+「笑死，根本不是机器学习，是人类学习 」
+<p align='right'><i class="fa fa-quote-right"></i><p></div>
+
+
+<h3 id="关于FFXIV"><a href="#关于FFXIV" class="headerlink" title="关于FFXIV"></a>关于FFXIV</h3><p>Since 2018。下图为曾经的猫。</p>
+<p><img src="/images/shigure_hotaru.jpg" alt="shigure_hotaru" title="傻猫"></p>
+<hr>
+<p>如今的拉拉肥。</p>
+<p><img src="/images/lalafell.png" alt="shigure_hotaru" title="拉拉肥"></p>
+<hr>
+<p>不如在这里贴一贴曾经的经历吧，来自曾经月雫话剧团的各位们。<br>详情可以去看 <a href="https://space.bilibili.com/4064009">月雫剧团录像机EijNim号</a></p>
+<p><img src="/images/hello_world_2.jpg" alt="shigure_hotaru" title="亲友们"></p>
+<hr>
+<p>也曾经攻略过绝本。感谢过去的队友们~<br>右三绿脖子的猫就是我啦~</p>
+<p><img src="/images/after.jpg" alt="alexander"></p>
+<p>详情可以去看 <a href="https://www.bilibili.com/video/BV14E411M7eS">这个</a></p>
+<h2 id="如今"><a href="#如今" class="headerlink" title="如今"></a>如今</h2><p>目前是一名只要日子过得去就不准备随便改变的程序员</p>
+<p>该如何面对未来呢~</p>
+<h2 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h2><p>理想型是喜欢自己的人。</p>
+<p>不过未来谁又能明白呢，或许想要成为一名努力而又有所成就的人吧</p>
+<hr>
+]]></content>
+      <categories>
+        <category>碎碎念</category>
+      </categories>
+  </entry>
+  <entry>
     <title>站点日志</title>
     <url>/2021/04/27/Diary/</url>
     <content><![CDATA[<h3 id="2021-04-28"><a href="#2021-04-28" class="headerlink" title="2021-04-28"></a>2021-04-28</h3><p><strong>1. 更换主题为 Next，调试 Next 各项配置</strong><br><strong>2. 置顶 Hello World 日志</strong><br><strong>3. 更换背景图片，更新日志信息，发布第一份日志</strong></p>
 <h3 id="2021-04-27"><a href="#2021-04-27" class="headerlink" title="2021-04-27"></a>2021-04-27</h3><p><strong>1. Hexo 脚本运行，初始化仓库</strong><br><strong>2. 编辑第一份日志，Hello World 提交</strong></p>
+<hr>
 ]]></content>
       <categories>
         <category>技术</category>

@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #2bcd09;
+  background: #1f4abb;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2846,7 +2846,7 @@ ul.breadcrumb li + li:last-child {
   color: #fff;
 }
 body {
-  font-size: 13px;
+  font-size: 14px;
   background-image: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/body-bg.png");
   background-repeat: repeat;
   background-attachment: fixed;
@@ -2868,9 +2868,21 @@ hr {
 }
 .quote_div {
   font-weight: bold;
-  font-family: '方正姚体';
-  font-size: 20px;
+  font-family: '微软雅黑 Light';
+  font-size: 19px;
   text-align: center;
+}
+.quote_div_en {
+  font-weight: bold;
+  font-family: '微软雅黑 Light';
+  font-size: 19px;
+  text-align: left;
+}
+.quote_div_en dd {
+  margin: 0px 0px 0px 80px;
+}
+.quote_div_en dt {
+  margin: 0px 80px 0px 80px;
 }
 code {
   font-size: 13px;
