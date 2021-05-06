@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1f4abb;
+  background: #6a34e9;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2850,6 +2850,7 @@ body {
   background-image: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/body-bg.png");
   background-repeat: repeat;
   background-attachment: fixed;
+  background-position: center, center;
 }
 @media (prefers-color-scheme: dark) {
   body {
@@ -2885,7 +2886,7 @@ hr {
   margin: 0px 80px 0px 80px;
 }
 code {
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 5px;
   margin: auto 2px;
   border: 1px solid #aaa;
