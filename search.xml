@@ -17,6 +17,7 @@
 
 <p>NoSQL （Not Only SQL） 即为非关系型的数据库。</p>
 <p>为了应对网络应用场景下的高并发和大规模数据应用，Cassandra 应运而生，是为了解决大数据应用难题而诞生的数据库解决方案之一。</p>
+<p>但是抛开华丽的外表， Cassandra 也只是一种存储数据的方法而已，如何去使用，如何去利用这些数据才是我们应该关心的事。</p>
 <h2 id="Cassandra-的不同之处"><a href="#Cassandra-的不同之处" class="headerlink" title="Cassandra 的不同之处"></a>Cassandra 的不同之处</h2><ul>
 <li><p>Cassandra 是分布式系统，在存储空间不够时，只需要增加节点就可以扩充存储空间。 而在使用关系型数据库，例如 mysql 时，它的单表数据量是有瓶颈的，当数据量到达一定级别，就需要考虑分库分表或者分区等。而这一点在 Cassandra 这里，仅需要增加节点就可以解决了，非常方便。</p>
 </li>
@@ -81,13 +82,14 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>Cassandra &amp; Spark</category>
       </categories>
       <tags>
         <tag>Cassandra</tag>
       </tags>
   </entry>
   <entry>
-    <title>0x03 - 学习地图</title>
+    <title>0x03 - 图像识别 学习地图</title>
     <url>/2021/04/30/0x03-Machine-Learning-1/</url>
     <content><![CDATA[<h2 id="物件识别"><a href="#物件识别" class="headerlink" title="物件识别"></a>物件识别</h2><p>搭建在 PaddlePaddle 上的物件识别模块，Github: <a href="https://github.com/PaddlePaddle/PaddleDetection">PaddleDetection</a>。</p>
 <p>下面是概述图。</p>
@@ -233,6 +235,7 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
@@ -284,6 +287,7 @@
 ]]></content>
       <categories>
         <category>碎碎念</category>
+        <category>杂七杂八</category>
       </categories>
       <tags>
         <tag>杂七杂八</tag>
@@ -316,6 +320,7 @@
 ]]></content>
       <categories>
         <category>碎碎念</category>
+        <category>FFXIV</category>
       </categories>
       <tags>
         <tag>FFXIV的故事</tag>
@@ -372,6 +377,7 @@
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>Hexo</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
@@ -421,12 +427,14 @@
   <entry>
     <title>站点日志</title>
     <url>/2021/04/27/Diary/</url>
-    <content><![CDATA[<h3 id="2021-04-28"><a href="#2021-04-28" class="headerlink" title="2021-04-28"></a>2021-04-28</h3><p><strong>1. 更换主题为 Next，调试 Next 各项配置</strong><br><strong>2. 置顶 Hello World 日志</strong><br><strong>3. 更换背景图片，更新日志信息，发布第一份日志</strong></p>
+    <content><![CDATA[<h3 id="2021-05-06"><a href="#2021-05-06" class="headerlink" title="2021-05-06"></a>2021-05-06</h3><p><strong>1. 加入字数统计和时间统计</strong></p>
+<h3 id="2021-04-28"><a href="#2021-04-28" class="headerlink" title="2021-04-28"></a>2021-04-28</h3><p><strong>1. 更换主题为 Next，调试 Next 各项配置</strong><br><strong>2. 置顶 Hello World 日志</strong><br><strong>3. 更换背景图片，更新日志信息，发布第一份日志</strong></p>
 <h3 id="2021-04-27"><a href="#2021-04-27" class="headerlink" title="2021-04-27"></a>2021-04-27</h3><p><strong>1. Hexo 脚本运行，初始化仓库</strong><br><strong>2. 编辑第一份日志，Hello World 提交</strong></p>
 <hr>
 ]]></content>
       <categories>
         <category>技术</category>
+        <category>Hexo</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
