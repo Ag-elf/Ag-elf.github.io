@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d0ffab;
+  background: #787a5b;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2872,6 +2872,15 @@ hr {
   font-family: '微软雅黑 Light';
   font-size: 19px;
   text-align: center;
+}
+.htkt {
+  font-weight: bold;
+  font-family: '微软雅黑 Light';
+  font-size: 19px;
+  text-align: center;
+}
+.htkt dt {
+  margin: 0px 80px 0px 80px;
 }
 .quote_div_en {
   font-weight: bold;
