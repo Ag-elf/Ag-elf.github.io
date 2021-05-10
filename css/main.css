@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #787a5b;
+  background: #4028e3;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2929,6 +2929,6 @@ thead tr {
 thead tr:hover {
   background: rgba(255,255,255,0.5);
 }
-img {
-  box-shadow: 2px 2px 5px #888;
+img:not(.site-author-image):hover {
+  box-shadow: 1px 1px 3px #888;
 }
