@@ -305,6 +305,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/05/24/0x07-Docker_Usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/theme_images/avatar.png">
+      <meta itemprop="name" content="时雨牧流萤">
+      <meta itemprop="description" content="FFXIV Lovers | Coder">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="给予艾欧泽亚以救济">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/24/0x07-Docker_Usage/" class="post-title-link" itemprop="url">0x07 - Docker小鲸鱼的使用笔记 [1] 从无到有</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发布：</span>
+              
+
+              <time title="创建时间：2021-05-24 16:54:11 / 修改时间：17:44:59" itemprop="dateCreated datePublished" datetime="2021-05-24T16:54:11+08:00">2021-05-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类：</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/computer-science/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/computer-science/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/images/docker.png" alt="Docker 小鲸鱼"></p>
+<h1 id="Docker-Docker"><a href="#Docker-Docker" class="headerlink" title="Docker? Docker!"></a>Docker? Docker!</h1><p>Docker，码头工人，搬运工，承运者，可爱的小鲸鱼。</p>
+<p>简单来说 <a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a> 是一个开源的应用容器引擎。<br>开发者把应用，软件还有相应依赖通过 Docker 打包成一个轻量级、可移植的容器，<br>只要目标机器拥有 Docker 的运行环境，不用关心内部的依赖即可方便完成应用分发和发布工作，<br>非常适用于集群环境，既节约开销，也方便部署。</p>
+<h1 id="它如何工作？"><a href="#它如何工作？" class="headerlink" title="它如何工作？"></a>它如何工作？</h1><p>Image<br>Container<br>Registry</p>
+<h1 id="如何开始"><a href="#如何开始" class="headerlink" title="如何开始"></a>如何开始</h1><p>Reference:<br>当然，Docker 的项目网址还有<a target="_blank" rel="noopener" href="https://docs.docker.com/">文档</a>其实非常清晰明了。<br>如果对英文比较苦手，一些成品文档，例如 <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-tutorial.html">runnoob</a> 也是不错的去处。</p>
+<p>这里只是拾人牙慧，总结了一些自己在 Docker 使用过程中的经验。</p>
+<p>那让，我们开始吧——</p>
+<hr>
+<h2 id="0x00-安装"><a href="#0x00-安装" class="headerlink" title="0x00 安装"></a>0x00 安装</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>广大的 Linux 用户只需要运行以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun      <span class="comment"># 当然，Aliyun 是可选的</span></span></span><br></pre></td></tr></table></figure>
+
+<p>等待着一切安装完成——<br>然后让我们来看看成果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker -v</span></span><br></pre></td></tr></table></figure>
+
+<p>Ok，你已经准备好下一步了。</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>Windows 下的 Docker 可以在 <a target="_blank" rel="noopener" href="https://hub.docker.com/editions/community/docker-ce-desktop-windows">这里</a> 找到。<br>像是一般软件一样点击下一步安装完成后，小鲸鱼会出现在你的通知栏。</p>
+<p>这样，你就可以在 Windows 下使用 Docker 了。</p>
+<p>PS. 小鲸鱼偏好 Linux，在 Windows 下运行会额外消耗资源。</p>
+<h3 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h3><p>MacOS 我们可以使用 Homebrew 来安装 Docker。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew install --cask --appdir=/Applications docker</span></span><br></pre></td></tr></table></figure>
+
+<p>和 Windows 一样，安装完成后小鲸鱼会出现在你的状态栏。</p>
+<p>Enjoy ~</p>
+<h2 id="0x01-Hello-World"><a href="#0x01-Hello-World" class="headerlink" title="0x01 Hello World"></a>0x01 Hello World</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/05/13/0x06-Clustering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -429,7 +531,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-14 13:27:30" itemprop="dateModified" datetime="2021-05-14T13:27:30+08:00">2021-05-14</time>
+                <time title="修改时间：2021-05-19 09:57:22" itemprop="dateModified" datetime="2021-05-19T09:57:22+08:00">2021-05-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -481,7 +583,10 @@
 <p>「在苦尔鳗套娃的循环中体验，更快，更高，更强的痛楚。」——来自加雷马帝国的某位不愿意透露姓名的资深捕鱼人。</p>
 <p>「捕鱼人，可不适合在钓红龙时，露出脱钩的表情。」——来自伊修加德豪门的某位捕鱼人。</p>
 <h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p>建设伊修加德新农村，我辈义不容辞。</p>
-<p>捕鱼人不知道为什么，就被拽上了去往云冠群岛的特快空艇。<br>云冠群岛的独特气候每 3 个多小时（ET）就会变更一次。</p>
+<p>捕鱼人不知道为什么，就被拽上了去往云冠群岛的特快空艇。</p>
+<p>云冠群岛的独特气候每 3 个多小时就会变更一次。<br>这让，习惯了看早上天气，来预测下午天气的捕鱼人难以进行捕鱼作业。</p>
+<p>“云海中可能会没有蜻蜓，没有狮鹫。”<br>“但是莫莫拉莫拉的模样却依然会如期而至。”</p>
+<p>——还有在一起的，奇奇怪怪，形形色色的不死鱼。</p>
 
       
     </div>
@@ -1361,98 +1466,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/04/27/Diary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/theme_images/avatar.png">
-      <meta itemprop="name" content="时雨牧流萤">
-      <meta itemprop="description" content="FFXIV Lovers | Coder">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="给予艾欧泽亚以救济">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/27/Diary/" class="post-title-link" itemprop="url">站点日志</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发布：</span>
-
-              <time title="创建时间：2021-04-27 12:00:00" itemprop="dateCreated datePublished" datetime="2021-04-27T12:00:00+08:00">2021-04-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-17 09:26:11" itemprop="dateModified" datetime="2021-05-17T09:26:11+08:00">2021-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类：</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/computer-science/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/computer-science/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="2021-05-17"><a href="#2021-05-17" class="headerlink" title="2021-05-17"></a>2021-05-17</h3><p><strong>1. 加入友情链接</strong></p>
-<h3 id="2021-05-06"><a href="#2021-05-06" class="headerlink" title="2021-05-06"></a>2021-05-06</h3><p><strong>1. 加入字数统计和时间统计</strong></p>
-<h3 id="2021-04-28"><a href="#2021-04-28" class="headerlink" title="2021-04-28"></a>2021-04-28</h3><p><strong>1. 更换主题为 Next，调试 Next 各项配置</strong><br><strong>2. 置顶 Hello World 日志</strong><br><strong>3. 更换背景图片，更新日志信息，发布第一份日志</strong></p>
-<h3 id="2021-04-27"><a href="#2021-04-27" class="headerlink" title="2021-04-27"></a>2021-04-27</h3><p><strong>1. Hexo 脚本运行，初始化仓库</strong><br><strong>2. 编辑第一份日志，Hello World 提交</strong></p>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1519,20 +1537,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/category">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1556,6 +1574,9 @@
       友情链接
     </div>
     <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/qq_33238863" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_33238863" rel="noopener" target="_blank">wzcspace</a>
+        </li>
         <li class="links-of-blogroll-item">
           <a href="https://voidswordqqj.github.io/" title="https:&#x2F;&#x2F;voidswordqqj.github.io&#x2F;" rel="noopener" target="_blank">星际玩家不需要视力</a>
         </li>
@@ -1594,7 +1615,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">14 分钟</span>
+    <span title="站点阅读时长">16 分钟</span>
 </div>
 
         

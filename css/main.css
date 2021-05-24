@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d126fe;
+  background: #549ded;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2931,4 +2931,27 @@ thead tr:hover {
 }
 img:not(.site-author-image):hover {
   box-shadow: 1px 1px 3px #888;
+}
+.pagination {
+  background: rgba(255,255,255,0.8);
+  border-radius: 7px;
+}
+.pagination .page-number {
+  border-top: 0px;
+  border-radius: 7px;
+}
+.pagination .page-number:hover {
+  background: #ccc;
+}
+.pagination .page-number.current {
+  background: #8e8e8e;
+}
+.pagination .prev,
+.pagination .next {
+  border-top: 0px;
+  border-radius: 7px;
+}
+.pagination .prev:hover,
+.pagination .next:hover {
+  background: #ccc;
 }
