@@ -41,10 +41,9 @@
 <h1 id="Docker-Docker"><a href="#Docker-Docker" class="headerlink" title="Docker? Docker!"></a>Docker? Docker!</h1><p>Docker，码头工人，搬运工，承运者，可爱的小鲸鱼。</p>
 <p>简单来说 <a href="https://www.docker.com/">Docker</a> 是一个开源的应用容器引擎。<br>开发者把应用，软件还有相应依赖通过 Docker 打包成一个轻量级、可移植的容器，<br>只要目标机器拥有 Docker 的运行环境，不用关心内部的依赖即可方便完成应用分发和发布工作，<br>非常适用于集群环境，既节约开销，也方便部署。</p>
 <h1 id="它如何工作？"><a href="#它如何工作？" class="headerlink" title="它如何工作？"></a>它如何工作？</h1><p>Image<br>Container<br>Registry</p>
-<h1 id="如何开始"><a href="#如何开始" class="headerlink" title="如何开始"></a>如何开始</h1><p>Reference:<br>当然，Docker 的项目网址还有<a href="https://docs.docker.com/">文档</a>其实非常清晰明了。<br>如果对英文比较苦手，一些成品文档，例如 <a href="https://www.runoob.com/docker/docker-tutorial.html">runnoob</a> 也是不错的去处。</p>
+<h1 id="如何开始"><a href="#如何开始" class="headerlink" title="如何开始"></a>如何开始</h1><p>Reference:<br>当然，Docker 的项目网址还有<a href="https://docs.docker.com/">文档</a>其实非常清晰明了。<br>如果对英文比较苦手，一些成品文档，例如 <a href="https://www.runoob.com/docker/docker-tutorial.html">runoob</a> 也是不错的去处。</p>
 <p>这里只是拾人牙慧，总结了一些自己在 Docker 使用过程中的经验。</p>
-<p>那让，我们开始吧——</p>
-<hr>
+<p>那么，让我们开始吧——</p>
 <h2 id="0x00-安装"><a href="#0x00-安装" class="headerlink" title="0x00 安装"></a>0x00 安装</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>广大的 Linux 用户只需要运行以下内容：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun      <span class="comment"># 当然，Aliyun 是可选的</span></span></span><br></pre></td></tr></table></figure>
 
@@ -60,7 +59,54 @@
 
 <p>和 Windows 一样，安装完成后小鲸鱼会出现在你的状态栏。</p>
 <p>Enjoy ~</p>
-<h2 id="0x01-Hello-World"><a href="#0x01-Hello-World" class="headerlink" title="0x01 Hello World"></a>0x01 Hello World</h2>]]></content>
+<h2 id="0x01-Hello-World"><a href="#0x01-Hello-World" class="headerlink" title="0x01 Hello World"></a>0x01 Hello World</h2><p><code>Docker</code> 的 <code>Hello World</code> 分为两步：</p>
+<ol>
+<li>将应用打包为 <code>Docker Image</code></li>
+<li>将 <code>Docker Image</code> 放入 <code>Docker Container</code> 运行</li>
+</ol>
+<h3 id="1-打包"><a href="#1-打包" class="headerlink" title="1. 打包"></a>1. 打包</h3><p>首先，让我们建立一个简单的应用。</p>
+<p>假设我们的应用如下：<br>我们希望运行 <code>Docker</code>后，在屏幕上打印下 <code>Hello World</code>。</p>
+<p>那么实际操作的流程如下</p>
+<p>运行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir helloWorld</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> helloWorld</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi run.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>并保存以下命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;Hello world&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>在当前文件夹下新建一个 <code>Dockerfile</code><br><strong>注意！很多关于镜像的设置都基于 Dockerfile ，这里先简单略过。</strong><br><strong>关于 Dockerfile 的编写，请看这里。</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi Dockerfile</span></span><br></pre></td></tr></table></figure>
+
+<p>然后让我们在 <code>Dockerfile</code> 里添加如下的信息：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu                                         <span class="comment"># 这是告诉 Docker, 这个镜像基于什么构建，所有的 Docker 镜像都需要这么一行命令</span></span><br><span class="line">                                                    <span class="comment"># 不同的应用基于不同的镜像，这里由于我们只用了一些基础命令，所以 ubuntu 镜像即可</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> Shigure_Hotaru                           <span class="comment"># 维护人，也就是作者</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> . /code                                         <span class="comment"># 将文件夹内的东西 Copy 到 镜像中 /code 文件夹内</span></span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /code                                       <span class="comment"># 相当于 cd /code </span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;Echo Before Running The Docker Image&quot;</span>     <span class="comment"># RUN 修饰的命令表示在 &quot;构建镜像&quot; 时运行的命令</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> sh run.sh                                       <span class="comment"># CMD 修饰的命令表示在 &quot;运行镜像&quot; 时运行的命令</span></span></span><br></pre></td></tr></table></figure>
+
+<p>准备就绪以后这样运行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker build -t hw:v1.0 . <span class="comment"># -t 表示 tag，可以理解为是版本号，在 hw 冒号后的就是版本信息了，最后的 . 表示当前文件夹</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>Docker</code> 会把你在 <code>Dockerfile</code> 里写入的步骤，一步步执行。</p>
+<p>我们关注一下第 5 步：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Step 5&#x2F;6 : RUN echo &quot;Echo Before Running The Docker Image&quot;</span><br><span class="line"> ---&gt; Running in b0446bd5ad97</span><br><span class="line">Echo Before Running The Docker Image</span><br><span class="line">Removing intermediate container b0446bd5ad97</span><br></pre></td></tr></table></figure>
+<p>这一步就相当于是运行 <code>RUN</code> 后的命令。<br>假如有需要安装依赖，或者在运行前进行的准备工作，都可以用 <code>RUN</code> 修饰完成。</p>
+<p>在完成了镜像构建以后，让我们看看我们的新镜像：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker images</span></span><br><span class="line">REPOSITORY   TAG       IMAGE ID       CREATED         SIZE</span><br><span class="line">hw           v1.0.0    54c64c094be8   7 minutes ago   72.7MB</span><br><span class="line">ubuntu       latest    7e0aa2d69a15   4 weeks ago     72.7MB</span><br></pre></td></tr></table></figure>
+<p>可以看到我们的镜像除了 hw 以外，还有一个 ubuntu 镜像，这个就是我们 hw 基于的原始镜像了。</p>
+<p>如果要移除镜像：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker rmi hw:v1.0.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo docker rmi 54c64c094be8      <span class="comment"># 使用镜像 ID 也可删除镜像</span></span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-运行"><a href="#2-运行" class="headerlink" title="2. 运行"></a>2. 运行</h3><p>其实 <code>Docker</code> 的运行十分简单：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker run hw:v1.0.0         <span class="comment"># 在新容器中运行 hw:v1.0.0 的镜像</span></span></span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
+
+<p>在这里我们没有用上各种各样的额外设置，下表总结了一些可能会用上的选项，更全的列表 <a href="https://docs.docker.com/engine/reference/commandline/run/">请看这里</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE [COMMAND] [ARGS...]</span><br><span class="line">    -d      后台运行该镜像</span><br><span class="line">    -i      以交互模式运行容器，一般与 -t 一起使用</span><br><span class="line">    -t      分配一个伪输入端口，一般与 -i 一起使用</span><br><span class="line">    -p      指定端口映射，格式：主机(宿主)端口:容器端口</span><br><span class="line">            例如： docker run -p 1234:5000 hw:v1.0.0 将暴露容器的 5000 端口，并将主机的 1234 端口映射到上面</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>在执行时，<code>Docker</code> 会给这个镜像分配一个容器，我们可以通过下面的命令来查看正在运行的容器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker ps -a</span></span><br><span class="line">CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS                      PORTS     NAMES</span><br><span class="line">0c7d9897897d   hw:v1.0.0   &quot;/bin/sh -c &#x27;sh run.…&quot;   20 seconds ago   Exited (0) 19 seconds ago             kind_ardinghelli</span><br></pre></td></tr></table></figure>
+<p>可以看到这个容器已经执行结束，假如我们需要知道执行过程中的日志信息，我们需要这样做：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker logs 0c7d9897897d</span></span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
+
+<p>如果要把容器移除的话，需要这样执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker rm 0c7d9897897d</span></span><br><span class="line">0c7d9897897d</span><br></pre></td></tr></table></figure>
+
+<p>以上，你已经学会如何正确驾驶小鲸鱼了；<br>现在，开始你最伟大的远航吧 ~</p>
+]]></content>
       <categories>
         <category>技术</category>
         <category>Docker</category>
