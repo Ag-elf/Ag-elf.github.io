@@ -40,7 +40,17 @@
     <content><![CDATA[<p><img src="/images/docker.png" alt="Docker 小鲸鱼"></p>
 <h1 id="Docker-Docker"><a href="#Docker-Docker" class="headerlink" title="Docker? Docker!"></a>Docker? Docker!</h1><p>Docker，码头工人，搬运工，承运者，可爱的小鲸鱼。</p>
 <p>简单来说 <a href="https://www.docker.com/">Docker</a> 是一个开源的应用容器引擎。<br>开发者把应用，软件还有相应依赖通过 Docker 打包成一个轻量级、可移植的容器，<br>只要目标机器拥有 Docker 的运行环境，不用关心内部的依赖即可方便完成应用分发和发布工作，<br>非常适用于集群环境，既节约开销，也方便部署。</p>
-<h1 id="它如何工作？"><a href="#它如何工作？" class="headerlink" title="它如何工作？"></a>它如何工作？</h1><p>Image<br>Container<br>Registry</p>
+<h1 id="它如何工作？"><a href="#它如何工作？" class="headerlink" title="它如何工作？"></a>它如何工作？</h1><p>对于 Docker 来说，其整体的框架结构像这样：</p>
+<p>首先，我们将应用打包为一个又一个的 IMAGE；<br>然后，在需要运行时，我们将这些镜像提取出来，创建一个对应的 CONTAINER 来运行它；<br>而这个打包好的 IMAGE 存储的地方，就叫做 REGISTRY。</p>
+<p>因此运行的流程可以概括如下：</p>
+<ol>
+<li>从 REGISTRY 获取 IMAGE</li>
+<li>创建一个 CONTAINER。</li>
+<li>将 IMAGE 放入 CONTAINER 运行。</li>
+</ol>
+<p>同一个 IMAGE 可以创建千千万万个 CONTAINER。<br>同一个 REGISTRY 可以存放许许多多的 IMAGE。<br>而一个 CONTAINER 一次尽量只运行一个 IMAGE。</p>
+<p>似乎会有人将 CONTAINER 当作是虚拟机来理解，<br>但是在这里，CONTAINER 更像是一个独立的进程，而非是一个虚拟机。</p>
+<p>因此如果需要多容器运行，请使用 docker-compose 工具进行管理。</p>
 <h1 id="如何开始"><a href="#如何开始" class="headerlink" title="如何开始"></a>如何开始</h1><p>Reference:<br>当然，Docker 的项目网址还有<a href="https://docs.docker.com/">文档</a>其实非常清晰明了。<br>如果对英文比较苦手，一些成品文档，例如 <a href="https://www.runoob.com/docker/docker-tutorial.html">runoob</a> 也是不错的去处。</p>
 <p>这里只是拾人牙慧，总结了一些自己在 Docker 使用过程中的经验。</p>
 <p>那么，让我们开始吧——</p>
@@ -53,7 +63,7 @@
 <p>Ok，你已经准备好下一步了。</p>
 <h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>Windows 下的 Docker 可以在 <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows">这里</a> 找到。<br>像是一般软件一样点击下一步安装完成后，小鲸鱼会出现在你的通知栏。</p>
 <p>这样，你就可以在 Windows 下使用 Docker 了。</p>
-<p>PS. 小鲸鱼偏好 Linux，在 Windows 下运行会额外消耗资源。</p>
+<p>PS. 小鲸鱼偏好 Linux，在 Windows 下运行会额外消耗资源，且需要安装 WSL （Windows Subsystem for Linux）来承载运行。</p>
 <h3 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h3><p>MacOS 我们可以使用 Homebrew 来安装 Docker。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew install --cask --appdir=/Applications docker</span></span><br></pre></td></tr></table></figure>
 
@@ -106,6 +116,10 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo docker rm 0c7d9897897d</span></span><br><span class="line">0c7d9897897d</span><br></pre></td></tr></table></figure>
 
 <p>以上，你已经学会如何正确驾驶小鲸鱼了；<br>现在，开始你最伟大的远航吧 ~</p>
+<h2 id="之后的事"><a href="#之后的事" class="headerlink" title="之后的事"></a>之后的事</h2><p>事实上，如果要把一个镜像，从无到有，从代码到镜像，再放入容器，最后再从外部访问这个服务，<br>中间涉及到的过程其实十分复杂，不仅需要搭配合适的网关网口，还需要注意各种端口转发和服务框架。</p>
+<p>最后，业务的逻辑，和一些部署时的杂事，也是需要注意的地方。</p>
+<p>小鲸鱼虽然脾气不大，但是运送小鲸鱼的人可是十足的难缠。</p>
+<p>kubernets，k8s，容器托管。</p>
 ]]></content>
       <categories>
         <category>技术</category>
