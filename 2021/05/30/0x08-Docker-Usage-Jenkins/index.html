@@ -20,20 +20,23 @@
     var CONFIG = {"hostname":"ag-elf.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"fadeIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="0x00 大海大海可以是浪漫， 无垠，无限，渺无边际。  Johnny Boy, Johnny Boy, we are born for stormy weather. Johnny Boy, Johnny Boy, I wish you last farewell. Somewhere out far away, we are sailing on together. Oh Johnny, my">
+  <meta name="description" content="自动化难题当你完成了代码的提交，当你重新又反复地进行着，搭建镜像，上传镜像，运行容器的操作，你是否发觉这一切重复的劳作让人有点疲惫。 如果说，能够在完成了代码开发工作后，将代码 push 到云上的托管仓库时，就可以自动进入流程，让计算机托管完成上述的一切任务，那开发工作也会变得惬意而轻松。 诚然，我们可以写一个简单的 shell 脚本： 12345$ docker build -t myApps">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0x02 - 杂碎">
-<meta property="og:url" content="https://ag-elf.github.io/2021/04/29/0x02-Other-things-1/index.html">
+<meta property="og:title" content="0x08 - Docker小鲸鱼的使用笔记 [2] 自动化的第一步 with Jenkins">
+<meta property="og:url" content="https://ag-elf.github.io/2021/05/30/0x08-Docker-Usage-Jenkins/index.html">
 <meta property="og:site_name" content="给予艾欧泽亚以救济">
-<meta property="og:description" content="0x00 大海大海可以是浪漫， 无垠，无限，渺无边际。  Johnny Boy, Johnny Boy, we are born for stormy weather. Johnny Boy, Johnny Boy, I wish you last farewell. Somewhere out far away, we are sailing on together. Oh Johnny, my">
+<meta property="og:description" content="自动化难题当你完成了代码的提交，当你重新又反复地进行着，搭建镜像，上传镜像，运行容器的操作，你是否发觉这一切重复的劳作让人有点疲惫。 如果说，能够在完成了代码开发工作后，将代码 push 到云上的托管仓库时，就可以自动进入流程，让计算机托管完成上述的一切任务，那开发工作也会变得惬意而轻松。 诚然，我们可以写一个简单的 shell 脚本： 12345$ docker build -t myApps">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-29T04:48:25.000Z">
-<meta property="article:modified_time" content="2021-05-06T07:44:04.423Z">
+<meta property="og:image" content="https://ag-elf.github.io/images/Jenkins.png">
+<meta property="article:published_time" content="2021-05-30T06:42:52.000Z">
+<meta property="article:modified_time" content="2021-05-30T07:31:55.763Z">
 <meta property="article:author" content="时雨牧流萤">
-<meta property="article:tag" content="杂七杂八">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ag-elf.github.io/images/Jenkins.png">
 
-<link rel="canonical" href="https://ag-elf.github.io/2021/04/29/0x02-Other-things-1/">
+<link rel="canonical" href="https://ag-elf.github.io/2021/05/30/0x08-Docker-Usage-Jenkins/">
 
 
 <script id="page-configurations">
@@ -46,7 +49,7 @@
   };
 </script>
 
-  <title>0x02 - 杂碎 | 给予艾欧泽亚以救济</title>
+  <title>0x08 - Docker小鲸鱼的使用笔记 [2] 自动化的第一步 with Jenkins | 给予艾欧泽亚以救济</title>
   
 
 
@@ -193,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/04/29/0x02-Other-things-1/">
+    <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/05/30/0x08-Docker-Usage-Jenkins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/theme_images/avatar.png">
@@ -206,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          0x02 - 杂碎
+          0x08 - Docker小鲸鱼的使用笔记 [2] 自动化的第一步 with Jenkins
         </h1>
 
         <div class="post-meta">
@@ -216,27 +219,21 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发布：</span>
+              
 
-              <time title="创建时间：2021-04-29 12:48:25" itemprop="dateCreated datePublished" datetime="2021-04-29T12:48:25+08:00">2021-04-29</time>
+              <time title="创建时间：2021-05-30 14:42:52 / 修改时间：15:31:55" itemprop="dateCreated datePublished" datetime="2021-05-30T14:42:52+08:00">2021-05-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-06 15:44:04" itemprop="dateModified" datetime="2021-05-06T15:44:04+08:00">2021-05-06</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类：</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/small-talks/" itemprop="url" rel="index"><span itemprop="name">碎碎念</span></a>
+                  <a href="/category/computer-science/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/small-talks/others/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+                  <a href="/category/computer-science/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
                 </span>
             </span>
 
@@ -246,7 +243,7 @@
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -258,46 +255,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="0x00-大海"><a href="#0x00-大海" class="headerlink" title="0x00 大海"></a>0x00 大海</h2><p>大海可以是浪漫，</p>
-<p>无垠，无限，渺无边际。</p>
-<div class='quote_div_en'><p align='left'><i class="fa fa-quote-left"></i></p>
-<dd>Johnny Boy, Johnny Boy, we are born for stormy weather.</dd>
-<dd>Johnny Boy, Johnny Boy, I wish you last farewell.</dd>
-<dd>Somewhere out far away, we are sailing on together.</dd>
-<dd>Oh Johnny, my, we are leaving tonight.</dd>
-<dd>Johnny say Good Bye.</dd>
-<dt align='right'> ------ From <i>"Johnny Boy"</i> By Santiano</dt>
-<p align='right'><i class="fa fa-quote-right"></i><p></div>
+        <p><img src="/images/Jenkins.png" alt="Jenkins"></p>
+<h1 id="自动化难题"><a href="#自动化难题" class="headerlink" title="自动化难题"></a>自动化难题</h1><p>当你完成了代码的提交，<br>当你重新又反复地进行着，搭建镜像，上传镜像，运行容器的操作，<br>你是否发觉这一切重复的劳作让人有点疲惫。</p>
+<p>如果说，能够在完成了代码开发工作后，将代码 push 到云上的托管仓库时，<br>就可以自动进入流程，让计算机托管完成上述的一切任务，那开发工作也会变得惬意而轻松。</p>
+<p>诚然，我们可以写一个简单的 shell 脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker build -t myApps:v1.0 .</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker login --username=yourname your.registry.address.com</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker tag myApps:v1.0 your.registry.address.com/myApps:v1.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker push your.registry.address.com/myApps:v1.0</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker rmi your.registry.address.com/myApps:v1.0</span></span><br></pre></td></tr></table></figure>
 
-<p>说不定去当海盗是个不错的归处。</p>
-<h2 id="0x01-朗姆酒"><a href="#0x01-朗姆酒" class="headerlink" title="0x01 朗姆酒"></a>0x01 朗姆酒</h2><p>如果海盗不打杀，只是在船上，</p>
-<p>早期的水手们，因为清水容易变质会致病，</p>
-<p>为了保存珍贵的水资源，都喜欢喝朗姆酒。</p>
-<p>说不定一船人，天天都醉醺醺的，</p>
-<p>横摆着，摇晃着，朗姆酒与啤酒，</p>
-<p>这样自由的日子比起打工和上班族，好像更不错。</p>
-<p>杨帆，起航——</p>
-<p>需要救命的朗姆，朗姆，朗姆，否则我们将干渴而死！</p>
-<div class='quote_div_en'><p align='left'><i class="fa fa-quote-left"></i></p>
-<dd>Wir brauchen Rum, Rum, Rum, Sonst verdursten wir.</dd>
-<dt align='right'> ------ From <i>"Es gibt nur Wasser"</i> By Santiano</dt>
-<p align='right'><i class="fa fa-quote-right"></i><p></div>
-
-
-<h2 id="0x02-海里有什么"><a href="#0x02-海里有什么" class="headerlink" title="0x02 海里有什么"></a>0x02 海里有什么</h2><p>有宝藏、有梦想、还有阴魂不散的莫莫拉·莫拉。</p>
-<p>真正的文兰或许不会存在，死后也不会回归瓦尔哈拉，</p>
-<p>但对于海盗来说，梦想与彼方对于自己来说又有什么关系呢？</p>
-<p>《冰海战记》中对于维京海盗的描写出乎我的意料。</p>
-<p>也许烧杀抢掠才该是海盗生活的主旋律，<br>但是阿谢拉特有自己的梦想，远方的文兰，自己的抱负。<br>出身卑贱，背负着罗马人的血脉，</p>
-<p>不管是大帝还是托尔芬，<br>大概都会铭记一生吧。</p>
-<p>海水是咸，裹挟着苦辣，把所有的一切都蚀刻殆尽。</p>
-<h2 id="0x03-彼岸"><a href="#0x03-彼岸" class="headerlink" title="0x03 彼岸"></a>0x03 彼岸</h2><p>自己珍惜的东西永远只有自己是最珍视的，<br>但大部分情况这就足够了。</p>
-<p>毕竟任何人都没有义务，去喜欢别人喜欢的东西。</p>
-<p>竟然真的可以在海边钓一整天的鱼，<br>既没有烦躁，也没有愉悦。<br>只是对着那一片汪洋，<br>甩杆，收杆，甩杆，收杆。</p>
-<p>越是缝缝补补，<br>错误也就不断累积。<br>或早或晚，来去终有一天，<br>收获罪有应得。</p>
-<p>Bug 越多， 错误越多。</p>
-<p>「没关系，我自己一个人能行！」<br>听着，像是借口。</p>
-<hr>
+<p>它就可以半自动地将代码打包成镜像并装入线上的镜像仓库。<br>可是这样的方法让代码管理成为了一个头疼的问题。</p>
+<p>如果说可以在线上进行这一切的操作，包括测试和代码审查，能将这一切的流程进行自动化处理，<br>那么对于后续的开发工作来说，可以提升相当大的开发效率。</p>
+<p>于是请到今天的主角，<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/">Jenkins</a>，一款好用的开源持续集成工具。</p>
+<h1 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h1><p>我们想要的解决的问题是，希望将从代码提交至部署运行之间的所有流程，让 Jenkins 帮我们做自动化处理。</p>
+<p>那么简单来说，可以将步骤整理成下面这个样子：</p>
+<ol>
+<li>通过 Git 提交代码到 Gitee。</li>
+<li>触发 Gitee 的提交 hook ，会向指定的地址发送一个 post 请求。</li>
+<li>让 Jenkins 获取这个 post 请求， 然后 Jenkins 在本地服务器上将程序打包并上传至云上镜像。</li>
+<li>通知集群，并更新至最新的镜像。</li>
+</ol>
+<h2 id="0x00-从安装开始"><a href="#0x00-从安装开始" class="headerlink" title="0x00 从安装开始"></a>0x00 从安装开始</h2><p>安装 Jenkins 并不是一件特别难的事，请看<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/download/">这里</a>。<br>选择正确的版本安装，以及正确地配置环境即可。</p>
+<p>这里嘛 ~ 以后想起来的话会贴一些可能需要注意的事项。</p>
+<h2 id="0x01-配置-Jenkins"><a href="#0x01-配置-Jenkins" class="headerlink" title="0x01 配置 Jenkins"></a>0x01 配置 Jenkins</h2><p><em>施工中</em></p>
 
     </div>
 
@@ -308,7 +285,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/others/" rel="tag"><i class="fa fa-tag"></i> 杂七杂八</a>
+              <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+              <a href="/tags/Jenkins/" rel="tag"><i class="fa fa-tag"></i> Jenkins</a>
           </div>
 
         
@@ -317,13 +295,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/04/29/0x01-FFXIV-1/" rel="prev" title="0x01 - FFXIV - 01 - 阿猫和阿肥">
-      <i class="fa fa-chevron-left"></i> 0x01 - FFXIV - 01 - 阿猫和阿肥
+    <a href="/2021/05/24/0x07-Docker_Usage/" rel="prev" title="0x07 - Docker小鲸鱼的使用笔记 [1] 从无到有">
+      <i class="fa fa-chevron-left"></i> 0x07 - Docker小鲸鱼的使用笔记 [1] 从无到有
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/04/30/0x03-Machine-Learning-1/" rel="next" title="0x03 - 图像识别 学习地图">
-      0x03 - 图像识别 学习地图 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -382,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%A4%A7%E6%B5%B7"><span class="nav-number">1.</span> <span class="nav-text">0x00 大海</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E6%9C%97%E5%A7%86%E9%85%92"><span class="nav-number">2.</span> <span class="nav-text">0x01 朗姆酒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E6%B5%B7%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88"><span class="nav-number">3.</span> <span class="nav-text">0x02 海里有什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E5%BD%BC%E5%B2%B8"><span class="nav-number">4.</span> <span class="nav-text">0x03 彼岸</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E9%9A%BE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">自动化难题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E4%BB%8E%E5%AE%89%E8%A3%85%E5%BC%80%E5%A7%8B"><span class="nav-number">2.1.</span> <span class="nav-text">0x00 从安装开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%85%8D%E7%BD%AE-Jenkins"><span class="nav-number">2.2.</span> <span class="nav-text">0x01 配置 Jenkins</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
