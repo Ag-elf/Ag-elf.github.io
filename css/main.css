@@ -1270,7 +1270,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #01ffff;
+  background: #2524db;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2837,7 +2837,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .site-brand-container {
-  background: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/site-bg.jpg");
+  background: url("/theme_images/site-bg.jpg");
   opacity: 0.8;
   background-position: 70% 20%;
   background-size: cover;
@@ -2847,7 +2847,7 @@ ul.breadcrumb li + li:last-child {
 }
 body {
   font-size: 14px;
-  background-image: url("https://cdn.jsdelivr.net/gh/Ag-elf/ag-elf.github.io@master/theme_images/body-bg.png");
+  background-image: url("/theme_images/body-bg.png");
   background-repeat: repeat;
   background-attachment: fixed;
   background-position: center, center;

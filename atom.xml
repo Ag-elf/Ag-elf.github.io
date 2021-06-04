@@ -262,11 +262,11 @@
   </entry>
   
   <entry>
-    <title>Hitokoto</title>
+    <title>Hitokotos</title>
     <link href="https://ag-elf.github.io/2021/04/27/hitokoto/"/>
     <id>https://ag-elf.github.io/2021/04/27/hitokoto/</id>
     <published>2021-04-27T12:00:00.000Z</published>
-    <updated>2021-05-08T01:09:11.811Z</updated>
+    <updated>2021-06-04T04:49:48.374Z</updated>
     
     <content type="html"><![CDATA[<div class='htkt'><p align='left'><i class="fa fa-quote-left"></i></p><dd align='center' id="hitokoto">:D Getting Hitokoto </dd><dt align='right'> ------ From 「<t id="From">Johnny Boy</t>」 <t id="creator"></t></dt><script>  fetch('https://v1.hitokoto.cn')    .then(response => response.json())    .then(data => {      const hitokoto = document.getElementById('hitokoto')      const from = document.getElementById('From')      const creator = document.getElementById('creator')      hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid      hitokoto.innerText = data.hitokoto      from.innerText = data.from      if(data.from_who != null) {          creator.innerText = "By "+ data.from_who      }    })    .catch(console.error)</script><p align='right'><i class="fa fa-quote-right"></i><p></div><p>刷新会给你不一样的“一言”，接口支持：<a href="https://hitokoto.cn/">Hitokoto</a>。</p>]]></content>
     
