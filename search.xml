@@ -72,8 +72,8 @@
 <p>然后我们新建一个用来存放网页的文件夹并赋予权限：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p /home/git/blog-site/www</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chown git:git /home/git/blog-site/www</span></span><br></pre></td></tr></table></figure>
 
-<p>为了让 nginx 可以读取到文件，我们把下面这个用户添加进 git 用户组。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> usermod -a -G git www</span></span><br></pre></td></tr></table></figure>
+<p>为了让 nginx 可以读取到文件，我们把下面这个用户添加进 git 用户组并赋予权限：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> usermod -a -G git www</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod 755 /home/git/blog-site/www</span></span><br></pre></td></tr></table></figure>
 <p>最后，刷新一下配置：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> nginx -s reload</span></span><br></pre></td></tr></table></figure>
 

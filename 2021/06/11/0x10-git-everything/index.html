@@ -28,7 +28,7 @@
 <meta property="og:description" content="从原因开始使用别人搭建好的 Pages 服务当然可以很轻松的做到静态页面建站。但是不管是从自由性来说还是后续扩展性上来说，都不如自己建站来的安心放心。 Github pages 受限于网络，假如是从国内读取的话，很有可能没法流畅加载 （CDN 也并不流畅）而近期 Gitee Pages 也因为网络整治，没有办法提供正常的服务。 那怎么办呢？一切不如自己动手丰衣足食！从零开始，搭建我们自己的 Pag">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-11T06:30:46.000Z">
-<meta property="article:modified_time" content="2021-06-11T08:30:27.627Z">
+<meta property="article:modified_time" content="2021-06-11T10:07:48.572Z">
 <meta property="article:author" content="时雨牧流萤">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="nginx">
@@ -219,7 +219,7 @@
               <span class="post-meta-item-text">发布：</span>
               
 
-              <time title="创建时间：2021-06-11 14:30:46 / 修改时间：16:30:27" itemprop="dateCreated datePublished" datetime="2021-06-11T14:30:46+08:00">2021-06-11</time>
+              <time title="创建时间：2021-06-11 14:30:46 / 修改时间：18:07:48" itemprop="dateCreated datePublished" datetime="2021-06-11T14:30:46+08:00">2021-06-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,8 +288,8 @@
 <p>然后我们新建一个用来存放网页的文件夹并赋予权限：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p /home/git/blog-site/www</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chown git:git /home/git/blog-site/www</span></span><br></pre></td></tr></table></figure>
 
-<p>为了让 nginx 可以读取到文件，我们把下面这个用户添加进 git 用户组。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> usermod -a -G git www</span></span><br></pre></td></tr></table></figure>
+<p>为了让 nginx 可以读取到文件，我们把下面这个用户添加进 git 用户组并赋予权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> usermod -a -G git www</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod 755 /home/git/blog-site/www</span></span><br></pre></td></tr></table></figure>
 <p>最后，刷新一下配置：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> nginx -s reload</span></span><br></pre></td></tr></table></figure>
 
