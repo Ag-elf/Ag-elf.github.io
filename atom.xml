@@ -6,7 +6,7 @@
   <link href="https://ag-elf.github.io/atom.xml" rel="self"/>
   
   <link href="https://ag-elf.github.io/"/>
-  <updated>2021-06-10T09:54:40.655Z</updated>
+  <updated>2021-06-11T08:30:27.627Z</updated>
   <id>https://ag-elf.github.io/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>0x10 - Git Everything！在自己的服务器上搭建 Git 还有 pages 服务</title>
+    <link href="https://ag-elf.github.io/2021/06/11/0x10-git-everything/"/>
+    <id>https://ag-elf.github.io/2021/06/11/0x10-git-everything/</id>
+    <published>2021-06-11T06:30:46.000Z</published>
+    <updated>2021-06-11T08:30:27.627Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="从原因开始"><a href="#从原因开始" class="headerlink" title="从原因开始"></a>从原因开始</h1><p>使用别人搭建好的 Pages 服务当然可以很轻松的做到静态页面建站。<br>但是不管是从自由性来说还是后续扩展性上来说，都不如自己建站来的安心放心。</p><p>Github pages 受限于网络，假如是从国内读取的话，很有可能没法流畅加载 （CDN 也并不流畅）<br>而近期 Gitee Pages 也因为网络整治，没有办法提供正常的服务。</p><p>那怎么办呢？一切不如自己动手丰衣足食！<br>从零开始，搭建我们自己的 Pages 服务。</p><p>为其赋名：<code>Shigure Pages</code></p><h1 id="Shigure-Pages"><a href="#Shigure-Pages" class="headerlink" title="Shigure Pages"></a>Shigure Pages</h1><p>那么 Pages 服务大致分为两大块：</p><ol><li>Git 服务，或者说，需要一个仓库以供网页上传。</li><li>nginx 服务，用以搭建简单的 web 服务。</li></ol><p>我们需要通过 Git 仓库的管理功能，利用 hooks 脚本更新 nginx 指向的文件。</p><h2 id="Git-服务"><a href="#Git-服务" class="headerlink" title="Git 服务"></a>Git 服务</h2><p>和 Github pages 、 Gitee Pages 一样，我们需要有一个云上的仓库来存放我们导出的静态页面。</p><h3 id="搭建-git-服务"><a href="#搭建-git-服务" class="headerlink" title="搭建 git 服务"></a>搭建 git 服务</h3><p>搭建 git 服务相对简单：<br>首先我们增加一个 git 的用户组，还有一个名叫 git 的用户：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> groupadd git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> useradd -d /home/git -m git -s /bin/bash -g git</span></span><br></pre></td></tr></table></figure><p>接着我们切换到 git 用户，并且在 <code>/home/git</code> 文件夹下新建这么几个文件和文件夹：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> su git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /home/git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir .ssh gitrepo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> touch .ssh/authorized_keys</span></span><br></pre></td></tr></table></figure><p>请在 <code>.ssh/authorized_keys</code> 配置 git 的 SSH key，不明白如何配置 SSH key 的请往下面看。<br>之后，我们继续操作，添加一个 git 仓库：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> gitrepo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git init --bare sample.git</span></span><br></pre></td></tr></table></figure><p>这个仓库就是我们想要的仓库了，而仓库的地址为 <code>git@your.ip.address:~/gitrepo/sample.git</code>。<br>接着只需要按部就班，按照 git 的方式推送即可。</p><p>其实这就是一个简易的 git 平台了，后续只要像这样推送更新，就可以维护好一个不错的自定义 git 平台。</p><h3 id="创建-SSH-key-密钥对"><a href="#创建-SSH-key-密钥对" class="headerlink" title="创建 SSH key 密钥对"></a>创建 SSH key 密钥对</h3><p>首先找到你希望连接的终端，例如你希望用你的某台 Windows 10 系统电脑往这个仓库推送代码。<br>那么我们直接打开终端（Powershell，CMD 均可）</p><p>直接运行下面的命令，保持默认即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br></pre></td></tr></table></figure><p>你可以在 <code>C:\Users\Your_Name\.ssh</code> 里找到两个文件：<code>id_rsa</code>，<code>id_rsa.pub</code>，</p><p>右键用记事本打开 <code>id_rsa.pub</code>，并把里面的内容加在服务器 <code>/home/git/.ssh/authorized_keys</code> 中。<br>这样，你就可以用上面的地址 push git 仓库了。</p><h2 id="Nginx-服务"><a href="#Nginx-服务" class="headerlink" title="Nginx 服务"></a>Nginx 服务</h2><p>Nginx 是一个轻便的 web 服务框架，安装和使用都非常方便。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get upgrade              // 升级以及更新，不需要的话可以略过这两步</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /etc/nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp nginx.conf nginx.conf.bak      // 这是 nginx 的配置文件，备份以防万一</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi nginx.conf                     // 新建一个 conf 文件</span></span><br></pre></td></tr></table></figure><p>然后把配置文件写成以下这个样子：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除所有内容，将以下内容写入nginx.conf</span></span><br><span class="line"><span class="comment"># user username;</span></span><br><span class="line">worker_processes auto;</span><br><span class="line"></span><br><span class="line"><span class="comment"># error_log  logs/error.log;</span></span><br><span class="line"><span class="comment"># error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="comment"># error_log  logs/error.log  info;</span></span><br><span class="line"></span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line"></span><br><span class="line">include /etc/nginx/modules-enabled/*.conf;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">worker_connections <span class="number">1024</span>;</span><br><span class="line"><span class="comment"># multi_accept on;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">includemime.types;</span><br><span class="line">default_typeapplication/octet-stream;</span><br><span class="line"></span><br><span class="line"><span class="comment"># log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span></span><br><span class="line"><span class="comment">#  &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line"><span class="comment">#  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span></span><br><span class="line"><span class="comment"># access_log  logs/access.log  main;</span></span><br><span class="line">sendfile        on;</span><br><span class="line"><span class="comment"># tcp_nopush     on;</span></span><br><span class="line">keepalive_timeout  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">listen <span class="number">80</span>;</span><br><span class="line">location / &#123;</span><br><span class="line"><span class="keyword">if</span> (!-e $request_filename) &#123;</span><br><span class="line">rewrite ^(.*)$ /$<span class="number">1.</span>html last;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">root /home/git/blog-site/www; </span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># /home/git/blog-site/www目录将是网站的根目录</span></span><br></pre></td></tr></table></figure><p>然后我们新建一个用来存放网页的文件夹并赋予权限：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p /home/git/blog-site/www</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chown git:git /home/git/blog-site/www</span></span><br></pre></td></tr></table></figure><p>为了让 nginx 可以读取到文件，我们把下面这个用户添加进 git 用户组。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> usermod -a -G git www</span></span><br></pre></td></tr></table></figure><p>最后，刷新一下配置：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> nginx -s reload</span></span><br></pre></td></tr></table></figure><p>至此 nginx 搭建完毕。</p><p>注：此部分教程参考自 <a href="https://blog.csdn.net/qq_34347375/article/details/105184040">这个链接</a>，部分内容修改，请酌情查看。</p><h2 id="Git-Hooks"><a href="#Git-Hooks" class="headerlink" title="Git Hooks"></a>Git Hooks</h2><p>为了要让 Git 仓库更新时触发 pages 的更新，我们需要更改一下 Git Hooks 脚本的配置。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> su git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/gitrepo/sample.git/hooks</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tree .</span></span><br><span class="line">.</span><br><span class="line">├── applypatch-msg.sample</span><br><span class="line">├── commit-msg.sample</span><br><span class="line">├── fsmonitor-watchman.sample</span><br><span class="line">├── post-update.sample</span><br><span class="line">├── pre-applypatch.sample</span><br><span class="line">├── pre-commit.sample</span><br><span class="line">├── pre-merge-commit.sample</span><br><span class="line">├── prepare-commit-msg.sample</span><br><span class="line">├── pre-push.sample</span><br><span class="line">├── pre-rebase.sample</span><br><span class="line">├── pre-receive.sample</span><br><span class="line">└── update.sample</span><br></pre></td></tr></table></figure><p>可以看到这下面有很多可执行的脚本。<br>那么其实 Git Hooks 的功能十分丰富，具体的话可以看 <a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">这里</a> 来了解更多的 hooks 原理。</p><p>我们需要用到的是 <code>post-receive</code> hook：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi post-receive</span></span><br></pre></td></tr></table></figure><p>把下面的内容添加到文件中，<br>注意，每个人的配置不同需求不同，请根据自己的需求进行修改。<br>我这边使用 <code>Hexo</code> 建站，目录结构比较单一</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">GIT_REPO=/home/git/gitrepo/sample.git       # 指定仓库路径</span><br><span class="line">PUBLIC_WWW=/home/git/blog-site/www          # 指定网页路径</span><br><span class="line">rm -rf $PUBLIC_WWW                          # 删除先前的网页</span><br><span class="line">git clone $GIT_REPO $PUBLIC_WWW             # 复制更新后的页面</span><br><span class="line">exit</span><br></pre></td></tr></table></figure><p>至此，一切就绪。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;从原因开始&quot;&gt;&lt;a href=&quot;#从原因开始&quot; class=&quot;headerlink&quot; title=&quot;从原因开始&quot;&gt;&lt;/a&gt;从原因开始&lt;/h1&gt;&lt;p&gt;使用别人搭建好的 Pages 服务当然可以很轻松的做到静态页面建站。&lt;br&gt;但是不管是从自由性来说还是后续扩展性上来</summary>
+      
+    
+    
+    
+    <category term="技术" scheme="https://ag-elf.github.io/category/computer-science/"/>
+    
+    <category term="其它" scheme="https://ag-elf.github.io/category/computer-science/others/"/>
+    
+    
+    <category term="git" scheme="https://ag-elf.github.io/tags/git/"/>
+    
+    <category term="nginx" scheme="https://ag-elf.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
     <title>0x09 - 语义化版本</title>
     <link href="https://ag-elf.github.io/2021/06/10/0x09-Version/"/>
     <id>https://ag-elf.github.io/2021/06/10/0x09-Version/</id>
     <published>2021-06-10T09:03:47.000Z</published>
-    <updated>2021-06-10T09:54:40.655Z</updated>
+    <updated>2021-06-11T03:08:03.088Z</updated>
     
     <content type="html"><![CDATA[<h1 id="语义化版本是个什么鬼玩意"><a href="#语义化版本是个什么鬼玩意" class="headerlink" title="语义化版本是个什么鬼玩意"></a>语义化版本是个什么鬼玩意</h1><p><a href="https://semver.org/lang/zh-CN/">直接贴上文档</a>，请参照文档来理解这份说明</p><p>简单来说，就是通过版本定义的名称来传达版本更新信息，常见的语义化版本像这样：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Version 2.0.1</span><br><span class="line">Version 1.19.2 - Alpha.9</span><br><span class="line">Version 1.0.0</span><br><span class="line">Version 1.0.0 - rc.0</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>我们用 <code>x.y.z</code> 来代表这三个数。</p><p>从右往左，z 表示的是版本的修订号，只有程序在做了向下兼容的 <strong>修正</strong> 时才递增，例如修改一些 bug 或是对结果进行一定程度的改善。</p><p>第二个数字，y 表示的是次版本号，在出现新功能或者弃用公共 API，又或者是在有大量修订或者新代码加入时递增，例如新添加了一个功能性的接口或是实现了一项简单的功能。当次版本号递增时，修订号必须归零。同样的，次版本号更迭必须 <strong>保证向下的兼容</strong> 。</p><p>第三个数字，x 表示的是主版本号，只有当出现 <strong>不可兼容的修改被加入公共 API 时</strong> 才会交替更新，例如涉及底层的修改，或者某个部分代码的重构，也可以包括次版本号及修订级别的改变。当 x 递增时，y，z 也必须归零。</p>]]></content>
     
@@ -35,8 +63,10 @@
     
     <category term="技术" scheme="https://ag-elf.github.io/category/computer-science/"/>
     
+    <category term="其它" scheme="https://ag-elf.github.io/category/computer-science/others/"/>
     
-    <category term="语义化版本" scheme="https://ag-elf.github.io/tags/%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC/"/>
+    
+    <category term="语义化版本" scheme="https://ag-elf.github.io/tags/version-control/"/>
     
   </entry>
   
@@ -145,7 +175,7 @@
     <category term="FFXIV" scheme="https://ag-elf.github.io/category/small-talks/FFXIV/"/>
     
     
-    <category term="FFXIV的故事" scheme="https://ag-elf.github.io/tags/FFXIV%E7%9A%84%E6%95%85%E4%BA%8B/"/>
+    <category term="FFXIV的故事" scheme="https://ag-elf.github.io/tags/final-fantasy-xiv-story/"/>
     
   </entry>
   
@@ -222,7 +252,7 @@
     
     <category term="碎碎念" scheme="https://ag-elf.github.io/category/small-talks/"/>
     
-    <category term="杂七杂八" scheme="https://ag-elf.github.io/category/small-talks/others/"/>
+    <category term="杂七杂八" scheme="https://ag-elf.github.io/category/small-talks/all-kinds/"/>
     
     
     <category term="杂七杂八" scheme="https://ag-elf.github.io/tags/others/"/>
@@ -253,7 +283,7 @@
     <category term="FFXIV" scheme="https://ag-elf.github.io/category/small-talks/FFXIV/"/>
     
     
-    <category term="FFXIV的故事" scheme="https://ag-elf.github.io/tags/FFXIV%E7%9A%84%E6%95%85%E4%BA%8B/"/>
+    <category term="FFXIV的故事" scheme="https://ag-elf.github.io/tags/final-fantasy-xiv-story/"/>
     
   </entry>
   

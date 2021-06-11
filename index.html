@@ -28,6 +28,8 @@
 <meta property="og:description" content="FFXIV Lovers | Coder">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="时雨牧流萤">
+<meta property="article:tag" content="计算机技术">
+<meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="时雨牧流萤">
 <meta property="article:tag" content="艾欧泽亚">
 <meta property="article:tag" content="FF14">
@@ -305,6 +307,137 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/06/11/0x10-git-everything/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/theme_images/avatar.png">
+      <meta itemprop="name" content="时雨牧流萤">
+      <meta itemprop="description" content="FFXIV Lovers | Coder">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="给予艾欧泽亚以救济">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/11/0x10-git-everything/" class="post-title-link" itemprop="url">0x10 - Git Everything！在自己的服务器上搭建 Git 还有 pages 服务</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发布：</span>
+              
+
+              <time title="创建时间：2021-06-11 14:30:46 / 修改时间：16:30:27" itemprop="dateCreated datePublished" datetime="2021-06-11T14:30:46+08:00">2021-06-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类：</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/computer-science/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/computer-science/others/" itemprop="url" rel="index"><span itemprop="name">其它</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="从原因开始"><a href="#从原因开始" class="headerlink" title="从原因开始"></a>从原因开始</h1><p>使用别人搭建好的 Pages 服务当然可以很轻松的做到静态页面建站。<br>但是不管是从自由性来说还是后续扩展性上来说，都不如自己建站来的安心放心。</p>
+<p>Github pages 受限于网络，假如是从国内读取的话，很有可能没法流畅加载 （CDN 也并不流畅）<br>而近期 Gitee Pages 也因为网络整治，没有办法提供正常的服务。</p>
+<p>那怎么办呢？一切不如自己动手丰衣足食！<br>从零开始，搭建我们自己的 Pages 服务。</p>
+<p>为其赋名：<code>Shigure Pages</code></p>
+<h1 id="Shigure-Pages"><a href="#Shigure-Pages" class="headerlink" title="Shigure Pages"></a>Shigure Pages</h1><p>那么 Pages 服务大致分为两大块：</p>
+<ol>
+<li>Git 服务，或者说，需要一个仓库以供网页上传。</li>
+<li>nginx 服务，用以搭建简单的 web 服务。</li>
+</ol>
+<p>我们需要通过 Git 仓库的管理功能，利用 hooks 脚本更新 nginx 指向的文件。</p>
+<h2 id="Git-服务"><a href="#Git-服务" class="headerlink" title="Git 服务"></a>Git 服务</h2><p>和 Github pages 、 Gitee Pages 一样，我们需要有一个云上的仓库来存放我们导出的静态页面。</p>
+<h3 id="搭建-git-服务"><a href="#搭建-git-服务" class="headerlink" title="搭建 git 服务"></a>搭建 git 服务</h3><p>搭建 git 服务相对简单：<br>首先我们增加一个 git 的用户组，还有一个名叫 git 的用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> groupadd git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> useradd -d /home/git -m git -s /bin/bash -g git</span></span><br></pre></td></tr></table></figure>
+
+<p>接着我们切换到 git 用户，并且在 <code>/home/git</code> 文件夹下新建这么几个文件和文件夹：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> su git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /home/git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir .ssh gitrepo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> touch .ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
+
+<p>请在 <code>.ssh/authorized_keys</code> 配置 git 的 SSH key，不明白如何配置 SSH key 的请往下面看。<br>之后，我们继续操作，添加一个 git 仓库：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> gitrepo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git init --bare sample.git</span></span><br></pre></td></tr></table></figure>
+
+<p>这个仓库就是我们想要的仓库了，而仓库的地址为 <code>git@your.ip.address:~/gitrepo/sample.git</code>。<br>接着只需要按部就班，按照 git 的方式推送即可。</p>
+<p>其实这就是一个简易的 git 平台了，后续只要像这样推送更新，就可以维护好一个不错的自定义 git 平台。</p>
+<h3 id="创建-SSH-key-密钥对"><a href="#创建-SSH-key-密钥对" class="headerlink" title="创建 SSH key 密钥对"></a>创建 SSH key 密钥对</h3><p>首先找到你希望连接的终端，例如你希望用你的某台 Windows 10 系统电脑往这个仓库推送代码。<br>那么我们直接打开终端（Powershell，CMD 均可）</p>
+<p>直接运行下面的命令，保持默认即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br></pre></td></tr></table></figure>
+<p>你可以在 <code>C:\Users\Your_Name\.ssh</code> 里找到两个文件：<code>id_rsa</code>，<code>id_rsa.pub</code>，</p>
+<p>右键用记事本打开 <code>id_rsa.pub</code>，并把里面的内容加在服务器 <code>/home/git/.ssh/authorized_keys</code> 中。<br>这样，你就可以用上面的地址 push git 仓库了。</p>
+<h2 id="Nginx-服务"><a href="#Nginx-服务" class="headerlink" title="Nginx 服务"></a>Nginx 服务</h2><p>Nginx 是一个轻便的 web 服务框架，安装和使用都非常方便。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get upgrade              // 升级以及更新，不需要的话可以略过这两步</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> /etc/nginx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp nginx.conf nginx.conf.bak      // 这是 nginx 的配置文件，备份以防万一</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi nginx.conf                     // 新建一个 conf 文件</span></span><br></pre></td></tr></table></figure>
+
+<p>然后把配置文件写成以下这个样子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除所有内容，将以下内容写入nginx.conf</span></span><br><span class="line"><span class="comment"># user username;</span></span><br><span class="line">worker_processes auto;</span><br><span class="line"></span><br><span class="line"><span class="comment"># error_log  logs/error.log;</span></span><br><span class="line"><span class="comment"># error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="comment"># error_log  logs/error.log  info;</span></span><br><span class="line"></span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line"></span><br><span class="line">include /etc/nginx/modules-enabled/*.conf;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">	worker_connections <span class="number">1024</span>;</span><br><span class="line">	<span class="comment"># multi_accept on;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">	include		mime.types;</span><br><span class="line">	default_type	application/octet-stream;</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span></span><br><span class="line">	<span class="comment">#  &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">	<span class="comment">#  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span></span><br><span class="line">	<span class="comment"># access_log  logs/access.log  main;</span></span><br><span class="line">	sendfile        on;</span><br><span class="line">	<span class="comment"># tcp_nopush     on;</span></span><br><span class="line">	keepalive_timeout  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">	server &#123;</span><br><span class="line">		listen <span class="number">80</span>;</span><br><span class="line">		location / &#123;</span><br><span class="line">			<span class="keyword">if</span> (!-e $request_filename) &#123;</span><br><span class="line">				rewrite ^(.*)$ /$<span class="number">1.</span>html last;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			root /home/git/blog-site/www; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># /home/git/blog-site/www目录将是网站的根目录</span></span><br></pre></td></tr></table></figure>
+<p>然后我们新建一个用来存放网页的文件夹并赋予权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p /home/git/blog-site/www</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chown git:git /home/git/blog-site/www</span></span><br></pre></td></tr></table></figure>
+
+<p>为了让 nginx 可以读取到文件，我们把下面这个用户添加进 git 用户组。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> usermod -a -G git www</span></span><br></pre></td></tr></table></figure>
+<p>最后，刷新一下配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> nginx -s reload</span></span><br></pre></td></tr></table></figure>
+
+<p>至此 nginx 搭建完毕。</p>
+<p>注：此部分教程参考自 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34347375/article/details/105184040">这个链接</a>，部分内容修改，请酌情查看。</p>
+<h2 id="Git-Hooks"><a href="#Git-Hooks" class="headerlink" title="Git Hooks"></a>Git Hooks</h2><p>为了要让 Git 仓库更新时触发 pages 的更新，我们需要更改一下 Git Hooks 脚本的配置。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> su git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/gitrepo/sample.git/hooks</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tree .</span></span><br><span class="line">.</span><br><span class="line">├── applypatch-msg.sample</span><br><span class="line">├── commit-msg.sample</span><br><span class="line">├── fsmonitor-watchman.sample</span><br><span class="line">├── post-update.sample</span><br><span class="line">├── pre-applypatch.sample</span><br><span class="line">├── pre-commit.sample</span><br><span class="line">├── pre-merge-commit.sample</span><br><span class="line">├── prepare-commit-msg.sample</span><br><span class="line">├── pre-push.sample</span><br><span class="line">├── pre-rebase.sample</span><br><span class="line">├── pre-receive.sample</span><br><span class="line">└── update.sample</span><br></pre></td></tr></table></figure>
+<p>可以看到这下面有很多可执行的脚本。<br>那么其实 Git Hooks 的功能十分丰富，具体的话可以看 <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">这里</a> 来了解更多的 hooks 原理。</p>
+<p>我们需要用到的是 <code>post-receive</code> hook：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi post-receive</span></span><br></pre></td></tr></table></figure>
+
+<p>把下面的内容添加到文件中，<br>注意，每个人的配置不同需求不同，请根据自己的需求进行修改。<br>我这边使用 <code>Hexo</code> 建站，目录结构比较单一</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">GIT_REPO=/home/git/gitrepo/sample.git       # 指定仓库路径</span><br><span class="line">PUBLIC_WWW=/home/git/blog-site/www          # 指定网页路径</span><br><span class="line">rm -rf $PUBLIC_WWW                          # 删除先前的网页</span><br><span class="line">git clone $GIT_REPO $PUBLIC_WWW             # 复制更新后的页面</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p>至此，一切就绪。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/06/10/0x09-Version/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -329,10 +462,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发布：</span>
-              
 
-              <time title="创建时间：2021-06-10 17:03:47 / 修改时间：17:54:40" itemprop="dateCreated datePublished" datetime="2021-06-10T17:03:47+08:00">2021-06-10</time>
+              <time title="创建时间：2021-06-10 17:03:47" itemprop="dateCreated datePublished" datetime="2021-06-10T17:03:47+08:00">2021-06-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-11 11:08:03" itemprop="dateModified" datetime="2021-06-11T11:08:03+08:00">2021-06-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -340,6 +479,10 @@
               <span class="post-meta-item-text">分类：</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/category/computer-science/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/computer-science/others/" itemprop="url" rel="index"><span itemprop="name">其它</span></a>
                 </span>
             </span>
 
@@ -1289,7 +1432,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/small-talks/others/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+                  <a href="/category/small-talks/all-kinds/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
                 </span>
             </span>
 
@@ -1350,112 +1493,6 @@
 <p>越是缝缝补补，<br>错误也就不断累积。<br>或早或晚，来去终有一天，<br>收获罪有应得。</p>
 <p>Bug 越多， 错误越多。</p>
 <p>「没关系，我自己一个人能行！」<br>听着，像是借口。</p>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://ag-elf.github.io/2021/04/29/0x01-FFXIV-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/theme_images/avatar.png">
-      <meta itemprop="name" content="时雨牧流萤">
-      <meta itemprop="description" content="FFXIV Lovers | Coder">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="给予艾欧泽亚以救济">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/29/0x01-FFXIV-1/" class="post-title-link" itemprop="url">0x01 - FFXIV - 01 - 阿猫和阿肥</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发布：</span>
-
-              <time title="创建时间：2021-04-29 00:49:15" itemprop="dateCreated datePublished" datetime="2021-04-29T00:49:15+08:00">2021-04-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-10 14:59:20" itemprop="dateModified" datetime="2021-05-10T14:59:20+08:00">2021-05-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类：</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/small-talks/" itemprop="url" rel="index"><span itemprop="name">碎碎念</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/small-talks/FFXIV/" itemprop="url" rel="index"><span itemprop="name">FFXIV</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>「潮虫，鳞虾，还有拟饵……」</p>
-<p>阿猫今天想做柠檬烤鱼，淡淡的酸味让他着迷，但越来越少的鱼饵难倒了他。</p>
-<p>这是阿猫来海都的第三天。咸咸的海风，拽着绵绵小雨，在入冬的海都显得格外清冷。<br>神典石上说，钓鱼得用 上好的鱼饵，但鱼只有在天晴的时候，才会在海都上层浮上水面。  </p>
-<p>「唔，又脱钩了。」</p>
-<p>阿猫摇了摇头，收起了鱼竿。他带了一整箱各式各样的鱼饵，但鱼王根本不搭理他，嘲笑着猫的不自量力，翻了几个泡泡游走了。</p>
-<p>……</p>
-<hr>
-<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>「嘿~你在做什么？」</p>
-<p>被拍了拍肩，正在发呆的尖耳朵拉拉菲尔吓了一跳，站在她后面的高个子猫魅一丝不漏把阳光全都罩住了。她站在猫魅背光的影子里，像是被盯上的猎物。</p>
-<p>「呜呜呜，不要吃我呜呜。。。」<br>拉拉菲尔就像兔子一般，委屈得哭了出来。</p>
-<p>「哎哎？」猫魅有点摸不着头脑，他只是钓鱼的时候被一股香味吸引了过来。</p>
-<p>周围的视线在菲尔的哭声中越发的刺人，猫魅有些慌张。<br>「不吃啦不吃，猫魅族吃拉拉菲尔那么油腻的肉会拉肚子的。」他这么说。</p>
-<p>「呜呜呜，你说我油。。。」<br>拉拉菲尔哭得更大声了。</p>
-<p>哎呀……猫魅挠了挠头，这可怎么办呢，鱼都被吓跑了。<br>但那个香味究竟是什么呢。</p>
-<p>好像包里有应对这种情况的道具？<br>他翻看了一下背包……</p>
-<p>「菲尔，菲尔，你看这是什么。」<br>还在小声的啜泣的拉拉菲尔睁开了哭红的眼睛，猫魅递过来了一个小纸袋子。</p>
-<p>「这是什么，是调味料嘛……」<br>哎……猫魅有点晕。「打开看看。」</p>
-<p>那是用竹纸包好的一小袋金平糖。拉拉菲尔取了一颗放进嘴里，砸吧砸吧，砂糖和蜂蜜的甜味混杂萦绕在舌尖。<br>真甜啊。。。她不禁低下了头</p>
-<p>「呼~这样就好了」，猫魅松了一口气，悄悄把藏在背包里的风信子头花系在菲尔的头上。果然小个子戴上头花才更可爱嘛。</p>
-<p>啊~<br>凑近了的猫魅明白过来。<br>从拉拉菲尔的头发，那是薰衣草的味道。<br>淡淡，悠扬，紫色的气味。</p>
 <hr>
 
       
@@ -1543,20 +1580,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/category">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1621,7 +1658,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20 分钟</span>
+    <span title="站点阅读时长">23 分钟</span>
 </div>
 
         
