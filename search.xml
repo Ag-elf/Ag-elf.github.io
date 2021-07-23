@@ -141,7 +141,12 @@
 </ol>
 <h2 id="0x00-从安装开始"><a href="#0x00-从安装开始" class="headerlink" title="0x00 从安装开始"></a>0x00 从安装开始</h2><p>安装 Jenkins 并不是一件特别难的事，请看<a href="https://www.jenkins.io/zh/download/">这里</a>。<br>选择正确的版本安装，以及正确地配置环境即可。</p>
 <p>这里嘛 ~ 以后想起来的话会贴一些可能需要注意的事项。</p>
-<h2 id="0x01-配置-Jenkins"><a href="#0x01-配置-Jenkins" class="headerlink" title="0x01 配置 Jenkins"></a>0x01 配置 Jenkins</h2><p><em>施工中</em></p>
+<h2 id="0x01-配置-Jenkins"><a href="#0x01-配置-Jenkins" class="headerlink" title="0x01 配置 Jenkins"></a>0x01 配置 Jenkins</h2><p>事实上 Jenkins 的配置并不难，依照其一步一步来即可。</p>
+<h3 id="Step-1-新建"><a href="#Step-1-新建" class="headerlink" title="Step 1 新建"></a>Step 1 新建</h3><p>新建一个自由风格的项目</p>
+<h3 id="Step-2-配置代码管理方式"><a href="#Step-2-配置代码管理方式" class="headerlink" title="Step 2 配置代码管理方式"></a>Step 2 配置代码管理方式</h3><p>使用 Git 来管理我们的的代码</p>
+<h3 id="Step-3-配置-Git-hooks"><a href="#Step-3-配置-Git-hooks" class="headerlink" title="Step 3 配置 Git hooks"></a>Step 3 配置 Git hooks</h3><p>安装 Gitee 插件，部署 Deployment Key，部署 Gitee Hooks</p>
+<h3 id="Step-4-配置-Docker"><a href="#Step-4-配置-Docker" class="headerlink" title="Step 4 配置 Docker"></a>Step 4 配置 Docker</h3><p>Docker Cloud，Docker 配置</p>
+<h3 id="Step-5-配置运行模式"><a href="#Step-5-配置运行模式" class="headerlink" title="Step 5 配置运行模式"></a>Step 5 配置运行模式</h3><p>在部署前如何运行命令行，或额外的命令</p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -731,7 +736,8 @@
   <entry>
     <title>站点日志</title>
     <url>/2021/04/27/Diary/</url>
-    <content><![CDATA[<h3 id="2021-07-20"><a href="#2021-07-20" class="headerlink" title="2021-07-20"></a>2021-07-20</h3><p><strong>1. 加入备案信息</strong><br><strong>2. 加入SEO</strong></p>
+    <content><![CDATA[<h3 id="2021-07-22"><a href="#2021-07-22" class="headerlink" title="2021-07-22"></a>2021-07-22</h3><p><strong>1. 添加站点地图</strong></p>
+<h3 id="2021-07-20"><a href="#2021-07-20" class="headerlink" title="2021-07-20"></a>2021-07-20</h3><p><strong>1. 加入备案信息</strong><br><strong>2. 加入SEO</strong></p>
 <h3 id="2021-05-17"><a href="#2021-05-17" class="headerlink" title="2021-05-17"></a>2021-05-17</h3><p><strong>1. 加入友情链接</strong></p>
 <h3 id="2021-05-06"><a href="#2021-05-06" class="headerlink" title="2021-05-06"></a>2021-05-06</h3><p><strong>1. 加入字数统计和时间统计</strong></p>
 <h3 id="2021-04-28"><a href="#2021-04-28" class="headerlink" title="2021-04-28"></a>2021-04-28</h3><p><strong>1. 更换主题为 Next，调试 Next 各项配置</strong><br><strong>2. 置顶 Hello World 日志</strong><br><strong>3. 更换背景图片，更新日志信息，发布第一份日志</strong></p>
