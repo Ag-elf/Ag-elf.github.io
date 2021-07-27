@@ -141,6 +141,7 @@
 </ol>
 <h2 id="0x00-从安装开始"><a href="#0x00-从安装开始" class="headerlink" title="0x00 从安装开始"></a>0x00 从安装开始</h2><p>安装 Jenkins 并不是一件特别难的事，请看<a href="https://www.jenkins.io/zh/download/">这里</a>。<br>选择正确的版本安装，以及正确地配置环境即可。</p>
 <p>这里嘛 ~ 以后想起来的话会贴一些可能需要注意的事项。</p>
+<p>可以先看下 Gitee 的 [官方教程] (<a href="https://gitee.com/help/articles/4193">https://gitee.com/help/articles/4193</a>)</p>
 <h2 id="0x01-配置-Jenkins"><a href="#0x01-配置-Jenkins" class="headerlink" title="0x01 配置 Jenkins"></a>0x01 配置 Jenkins</h2><p>事实上 Jenkins 的配置并不难，依照其一步一步来即可。</p>
 <h3 id="Step-1-新建"><a href="#Step-1-新建" class="headerlink" title="Step 1 新建"></a>Step 1 新建</h3><p>新建一个自由风格的项目</p>
 <h3 id="Step-2-配置代码管理方式"><a href="#Step-2-配置代码管理方式" class="headerlink" title="Step 2 配置代码管理方式"></a>Step 2 配置代码管理方式</h3><p>使用 Git 来管理我们的的代码</p>
